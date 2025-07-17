@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string> // For std::to_string
+
+int main() {
+    int num;
+
+    std::cout << "Enter an integer: ";
+    std::cin >> num;
+
+    if (std::cin.fail()) {
+        std::cout << "Invalid input. Please enter an integer.\n";
+        return 1;
+    }
+
+    std::cout << "\n--- Number Properties ---\n";
+
+    // Even or Odd
+    if (num % 2 == 0) {
+        std::cout << num << " is an Even number.\n";
+    } else {
+        std::cout << num << " is an Odd number.\n";
+    }
+
+    // Positive, Negative, or Zero
+    if (num > 0) {
+        std::cout << num << " is a Positive number.\n";
+    } else if (num < 0) {
+        std::cout << num << " is a Negative number.\n";
+    } else {
+        std::cout << num << " is Zero.\n";
+    }
+
+    // Single, Double Digit, or More
+    if (num >= -9 && num <= 9) { // Handles single digit for positive and negative
+        std::cout << num << " is a Single-digit number.\n";
+    } else if ((num >= -99 && num <= -10) || (num >= 10 && num <= 99)) { // Handles double digit
+        std::cout << num << " is a Double-digit number.\n";
+    } else {
+        std::cout << num << " has more than two digits.\n";
+    }
+
+    std::cout << "-------------------------\n";
+
+    return 0;
+}
