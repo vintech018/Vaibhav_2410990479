@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <iomanip>
+#include <limits> // Required for std::numeric_limits
+
+int main() {
+    const int NUM_SUBJECTS = 5;
+
+    std::vector<double> marks;
+    marks.reserve(NUM_SUBJECTS);
+
+    std::cout << "Enter marks for " << NUM_SUBJECTS << " subjects (out of 100):\n";
+
+    for (int i = 0; i < NUM_SUBJECTS; ++i) {
+        double subjectMark;
+        while (true) {
+            std::cout << "Subject " << (i + 1) << ": ";
+            std::cin >> subjectMark;
+
+            if (std::cin.fail() || subjectMark < 0 || subjectMark > 100) {
+                std::cout << "Invalid input. Please enter marks between 0 and 100.\n";
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            } else {
+                marks.push_back(subjectMark);
+                break;
+            }
+        }
+    }
+
+    double totalMarks = std::accumulate(marks.begin(), marks.end(), 0.0);
+
+    double averageMarks = totalMarks / NUM_SUBJECTS;
+
+    char grade;
+    if (averageMarks >= 90) {
+        grade = 'A';
+    } else if (averageMarks >= 80) {
+        grade = 'B';
+    } else if (averageMarks >= 70) {
+        grade = 'C';
+    } else if (averageMarks >= 60) {
+        grade = 'D';
+    } else {
+        grade = 'F';
+    }
+
+    std::cout << "\n--- Grade Report ---\n";
+    std::cout << "Total Marks: " << totalMarks << std::endl;
+    std::cout << "Average Marks: " << std::fixed << std::setprecision(2) << averageMarks << std::endl;
+    std::cout << "Grade: " << grade << std::endl;
+    std::cout << "--------------------\n";
+
+    return 0;
+}
